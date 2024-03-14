@@ -8,26 +8,26 @@
             rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
 <header class="primary-header container group">
     <h1 class="logo">
-        <a href="index.html"
+        <a href="index"
         >Amazing <br />
             Restaurant</a
         >
     </h1>
     <nav class="nav primary-nav">
         <ul>
-            <li><a href="home.html">Home</a></li>
+            <li><a href="/">Home</a></li>
 
-            <li><a href="menu.html">Menu</a></li>
+            <li><a href="/products">Menu</a></li>
 
-            <li><a href="rewards.html">Rewards</a></li>
+            <li><a href="/users">Rewards</a></li>
 
-            <li><a th:href="@{/sign-up.html}">Log in / Sign up</a></li>
+            <li><a href="/register">Log in / Sign up</a></li>
         </ul>
     </nav>
 </header>
@@ -35,14 +35,14 @@
 <section class="hero container">
     <h2>Get rewards from every dollar spent</h2>
 
-    <a class="btn btn-alt" th:href="@{/sign-up.html}">Create your account</a>
+    <a class="btn btn-alt" href="/register">Create your account</a>
 </section>
 
 <section class="row">
     <div class="grid">
         <section class="steps col-1-3">
             <h5>Step 1</h5>
-            <img src="images/undraw_hamburger_re_7sfy.svg" alt="" />
+            <img src="/img/undraw_hamburger_re_7sfy.svg" alt="" />
             <h3>Order your food</h3>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex
@@ -53,7 +53,7 @@
 
         <section class="steps col-1-3">
             <h5>Step 2</h5>
-            <img src="images/undraw_growing_re_olpi.svg" alt="" />
+            <img src="/img/undraw_growing_re_olpi.svg" alt="" />
             <h3>See your points stack up on your account</h3>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, modi
@@ -64,7 +64,7 @@
 
         <section class="steps col-1-3">
             <h5>Step 3</h5>
-            <img src="images/undraw_gift_card_re_5dyy.svg" alt="" />
+            <img src="/img/undraw_gift_card_re_5dyy.svg" alt="" />
             <h3>Redeem your rewards</h3>
             <p>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
