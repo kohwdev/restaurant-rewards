@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script
+            src="https://kit.fontawesome.com/e908656932.js"
+            crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+</head>
+<body>
+<header class="primary-header container group">
+    <h1 class="logo">
+        <a href="index"
+        >Amazing <br />
+            Restaurant</a
+        >
+    </h1>
+    <nav class="nav primary-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+
+            <li><a href="/products">Menu</a></li>
+
+            <li><a href="/users">Account</a></li>
+
+            <li><a href="/register">Log in / Sign up</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="main">
+    <i class="fa-solid fa-circle-user"></i>
+    <h3>Sign up</h3>
+    <div th:if="${param.success}">
+     <div class="alert alert-info">
+        Registration Success!
+     </div>
+    </div>
+    <form
+            method="post"
+            role="form"
+            th:action="@{/register/save}"
+            th:object="${user}"
+    >
+        <label id="emailLabel" for="username"> Email Address </label>
+        <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter your Email"
+                th:field="*{email}"
+                required
+        />
+        <label for="firstName"> First Name </label>
+        <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="Enter your first name"
+                th:field="*{firstName}"
+                required
+        />
+        <label for="lastName"> Last Name </label>
+        <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Enter your last name"
+                th:field="*{lastName}"
+                required
+        />
+
+        <label for="password"> Password </label>
+        <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your Password"
+                th:field="*{password}"
+                required
+        />
+<!--        <label for="confirmPassword"> Confirm Password </label>-->
+<!--        <input-->
+<!--                type="password"-->
+<!--                id="confirmPassword"-->
+<!--                name="confirmPassword"-->
+<!--                placeholder="Confirm your Password"-->
+<!--                required-->
+<!--        />-->
+
+        <div>
+            <button type="submit">Sign up</button><br>
+            <span>Already registered?<br> <a class="lr-link" th:href="@{/login}">Login here</a></span>
+        </div>
+    </form>
+</section>
+</body>
+</html>

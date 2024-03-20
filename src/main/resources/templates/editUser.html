@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/updateUser}" th:object="${userDto}" method="post">
+    <!-- Form fields for editing user details, bound to userDto properties -->
+    <input type="hidden" th:field="*{id}" />
+    <input type="text" th:field="*{firstName}" />
+    <input type="text" th:field="*{lastName}" />
+    <input type="email" th:field="*{email}" />
+    <!-- Additional fields as needed -->
+    <button type="submit">Update User</button>
+</form>
+
+</body>
+</html>
