@@ -2,23 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Order Summary</title>
+    <link rel="stylesheet" href="/css/style.css" />
+
 </head>
 <body>
-<h2>Order Summary</h2>
-<h3>Thank you for your Order!</h3>
-<h3 th:text="${user.name}"></h3>
-<div th:if="${order}">
-    <p>Order ID: <span th:text="${order.id}"></span></p>
-    <ul>
-        <li th:each="item : ${order.orderItems}">
-            <span th:text="${item.product.name}">Product Name</span> -
-            Quantity: <span th:text="${item.quantity}"></span> -
-            Price: <span th:text="${item.unitPrice}"></span>
-        </li>
-    </ul>
-    <p>Total Amount: <span th:text="${order.totalAmount}"></span></p>
-    <!-- Display other order details as needed -->
+<div class="container">
+    <h2>Order Summary</h2>
+    <h3>Thank you for your Order!</h3>
+    <h3 th:text="${user.name}"></h3>
+    <div th:if="${order}">
+        <p>Order ID: <span th:text="${order.id}"></span></p>
+        <ul>
+            <li th:each="item : ${order.orderItems}">
+                <span th:text="${item.product.name}">Product Name</span> -
+                Quantity: <span th:text="${item.quantity}"></span> -
+                Price: <span th:text="${item.unitPrice}"></span>
+            </li>
+        </ul>
+        <p>Total Amount: <span th:text="${order.totalAmount}"></span></p>
+        <!-- Display other order details as needed -->
+    </div>
+    <a class="create-btn" href="/products">Continue Shopping</a>
 </div>
-<a href="/products">Continue Shopping</a>
+
 </body>
+
+
 </html>

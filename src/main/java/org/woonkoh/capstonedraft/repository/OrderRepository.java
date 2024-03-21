@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    List<Order> findByUserEmail(String email);
-
     Order findFirstByUserIdAndStatus(Long userId, OrderStatus status);
-
 
 
 }

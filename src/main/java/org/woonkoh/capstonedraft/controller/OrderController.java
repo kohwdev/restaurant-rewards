@@ -65,7 +65,7 @@ public class OrderController {
         if (order.getOrderItems() == null || order.getOrderItems().isEmpty()) {
             // No items in the order, redirect to a suitable page with a message
             redirectAttributes.addFlashAttribute("emptyCartMessage", "Your cart is empty.");
-            return "redirect:/products"; // Redirect to a page where items can be added
+            return "redirect:/products";
         }
 
         model.addAttribute("order", order);
@@ -109,7 +109,7 @@ public class OrderController {
     @GetMapping("/orders/completed")
     public String showOrderSummary(@ModelAttribute("orderId") Long orderId, Model model, Principal principal) {
         if (orderId == null) {
-            return "redirect:/products"; // or some error page if orderId is missing
+            return "redirect:/products";
         }
 
         Order order = orderService.getOrderById(orderId)

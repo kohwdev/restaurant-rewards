@@ -38,7 +38,7 @@ public class SpringSecurity {
                         form -> form
                                 .loginPage("/login")
                                 .permitAll()
-                                .defaultSuccessUrl("/")
+                                .defaultSuccessUrl("/users")
                                 .failureUrl("/login?error=true")
                                 .usernameParameter("username")
                                 .passwordParameter("password")

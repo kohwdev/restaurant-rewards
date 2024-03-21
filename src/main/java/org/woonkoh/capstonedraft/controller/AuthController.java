@@ -63,6 +63,7 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
+    //Get all registered users from database
     @GetMapping("/users")
     public String listRegisteredUsers(Model model){
         List<UserDto> users = userService.findAllUsers();
@@ -70,8 +71,9 @@ public class AuthController {
         return "users";
     }
 
+    //Delete user account
     @GetMapping("/delete/{id}")
-    public String deleteTutorial(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
+    public String deleteUser(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
         try {
             userService.deleteUser(id);
 
@@ -84,6 +86,7 @@ public class AuthController {
     }
 
 
+    //display edit page to edit user details
     @GetMapping("/editUser/{id}")
     public String showEditUserForm(@PathVariable Long id, Model model) {
         User user = userRepository.findById(id)
@@ -95,7 +98,7 @@ public class AuthController {
     }
 
     private UserDto convertToDto(User user) {
-        // Conversion logic here. This is a simplified example.
+        //convert user to userDto, for the name since first and last name needs to be separated
         UserDto userDto = new UserDto();
         String[] nameParts = user.getName().split(" ", 2);
         userDto.setFirstName(nameParts[0]);
@@ -107,12 +110,12 @@ public class AuthController {
         userDto.setEmail(user.getEmail());
         userDto.setId(user.getId());
 
-        // Set other fields as needed
         return userDto;
     }
 
 
 
+    //update user details
     @PostMapping("/updateUser")
     public String updateUserDetails(@ModelAttribute("userDto") UserDto userDto, RedirectAttributes redirectAttributes) {
         User user = convertToEntity(userDto);
@@ -120,7 +123,7 @@ public class AuthController {
         redirectAttributes.addFlashAttribute("successMessage", "User updated successfully!");
         return "redirect:/users"; // Or wherever you'd like to redirect after updating
     }
-
+    //after the update is made, convert dto back to entity
     private User convertToEntity(UserDto userDto) {
         User user = userRepository.findById(userDto.getId())
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userDto.getId()));

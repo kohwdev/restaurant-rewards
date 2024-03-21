@@ -69,14 +69,13 @@ public class OrderService {
         order.setTotalAmount(BigDecimal.valueOf(totalAmount));
         order.setStatus(OrderStatus.NEW);
 
-        orderRepository.save(order); // Save the order with the new item
+        orderRepository.save(order);
 
         return order;
     }
 
     @Transactional
     public Order findOrCreateActiveOrder(Long userId) {
-        // Define the status that you will check for an active order, for example 'IN_CART'
         final OrderStatus activeStatus = OrderStatus.NEW;
 
         // Check for an existing active order for the user
@@ -129,23 +128,17 @@ public class OrderService {
     }
 
     private void checkAndUpdateUserRewards(User user) {
-        // Assuming 100 points are required for a reward to become available
+        // 100 points are required for a reward to become available
         if (user.getPoints() >= 100) {
-            // Implement the logic to update rewards
-            // For example, mark an existing reward as AVAILABLE or create a new one
             updateRewardStatusToAvailable(user);
         }
     }
 
     private void updateRewardStatusToAvailable(User user) {
-        // This method should encapsulate the logic for marking rewards as available
-        // It could check for an existing reward to update, or create a new Reward entity with status AVAILABLE
         Reward reward = new Reward();
         reward.setStatus(Reward.RewardStatus.AVAILABLE);
-        // Assuming you're setting additional properties of the reward based on your application needs
         reward = rewardRepository.save(reward);
         user.getRewards().add(reward);
-        // No need to explicitly save the user if you're in a transactional context and using cascading properly
     }
 
     @Transactional
