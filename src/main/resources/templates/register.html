@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,7 +31,15 @@
 
             <li><a href="/users">Account</a></li>
 
-            <li><a href="/register">Log in / Sign up</a></li>
+            <!--if user is not logged in, display log in/ sign up -->
+            <li sec:authorize="!isAuthenticated()"><a href="/register">Log in / Sign up</a></li>
+            <!--if user IS logged in, display logout -->
+            <li sec:authorize="isAuthenticated()">
+                <form action="/logout" method="post">
+                    <input class="logout-btn" type="submit" value="Logout" />
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                </form>
+            </li>
         </ul>
     </nav>
 </header>
@@ -85,14 +94,7 @@
                 th:field="*{password}"
                 required
         />
-<!--        <label for="confirmPassword"> Confirm Password </label>-->
-<!--        <input-->
-<!--                type="password"-->
-<!--                id="confirmPassword"-->
-<!--                name="confirmPassword"-->
-<!--                placeholder="Confirm your Password"-->
-<!--                required-->
-<!--        />-->
+
 
         <div>
             <button type="submit">Sign up</button><br>
@@ -100,5 +102,8 @@
         </div>
     </form>
 </section>
+
+<script type="module" src="/js/main.js"></script>
+
 </body>
 </html>

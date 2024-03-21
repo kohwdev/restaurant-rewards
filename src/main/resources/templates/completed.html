@@ -5,6 +5,8 @@
 </head>
 <body>
 <h2>Order Summary</h2>
+<h3>Thank you for your Order!</h3>
+<h3 th:text="${user.name}"></h3>
 <div th:if="${order}">
     <p>Order ID: <span th:text="${order.id}"></span></p>
     <ul>

@@ -362,6 +362,22 @@ img {
   text-transform: uppercase;
 }
 
+.logout-btn{
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.logout-btn:hover {
+  cursor: pointer;
+}
+
 /*
   Primary footer
 */
@@ -483,6 +499,15 @@ button:hover {
 }
 
 
+/* Reward status */
+.status-available{
+  color: #05c200;
+}
+
+.status-not-available {
+  color: #ae1c00;
+}
+
 
 .create-btn {
 align-items: center;
@@ -533,26 +558,6 @@ z-index: 0;
   border: 2px solid #4285f4;
 }
 
-
-/*loader*/
-.loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 2s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 .invalid-email {
   border-color: red;

@@ -107,15 +107,20 @@ public class OrderController {
     }
 
     @GetMapping("/orders/completed")
-    public String showOrderSummary(@ModelAttribute("orderId") Long orderId, Model model) {
+    public String showOrderSummary(@ModelAttribute("orderId") Long orderId, Model model, Principal principal) {
         if (orderId == null) {
             return "redirect:/products"; // or some error page if orderId is missing
         }
 
         Order order = orderService.getOrderById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Order not found with id: " + orderId));
+        String email = principal.getName();
+        User user = userServiceImpl.findByEmail(email);
+
+        model.addAttribute("user", user);
 
         model.addAttribute("order", order);
+
         return "completed";
     }
 
