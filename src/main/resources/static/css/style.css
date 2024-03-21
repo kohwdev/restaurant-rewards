@@ -499,6 +499,20 @@ button:hover {
 }
 
 
+/* Order details */
+.order-container {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2em;
+}
+
+.order-container div {
+  width: 30%;
+}
+
+
 /* Reward status */
 .status-available{
   color: #05c200;
@@ -506,6 +520,12 @@ button:hover {
 
 .status-not-available {
   color: #ae1c00;
+}
+
+.add-btn:hover {
+  cursor: pointer;
+  background: #555;
+  color: #fff;
 }
 
 

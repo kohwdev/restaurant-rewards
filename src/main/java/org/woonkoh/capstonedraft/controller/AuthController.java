@@ -10,6 +10,8 @@ import org.woonkoh.capstonedraft.model.User;
 import org.woonkoh.capstonedraft.model.UserDto;
 import org.woonkoh.capstonedraft.repository.UserRepository;
 import org.woonkoh.capstonedraft.service.UserService;
+
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -63,6 +65,7 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
+
     //Get all registered users from database
     @GetMapping("/users")
     public String listRegisteredUsers(Model model){
@@ -71,13 +74,14 @@ public class AuthController {
         return "users";
     }
 
+
     //Delete user account
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
         try {
             userService.deleteUser(id);
 
-            redirectAttributes.addFlashAttribute("message", "The Tutorial with id=" + id + " has been deleted successfully!");
+            redirectAttributes.addFlashAttribute("message", "User with id=" + id + " has been deleted successfully!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
         }

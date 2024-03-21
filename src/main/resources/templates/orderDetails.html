@@ -42,28 +42,35 @@
 </header>
 
 
-<section class="container">
-    <h2>Order Details</h2>
+<section class="order-container">
+    <div>
+        <h2>Order Details</h2>
 
-    <ul>
-        <li th:each="item : ${order.orderItems}"> <!-- Adjusted to iterate over orderItems -->
-            <span th:text="${item.product.name}">Product Name</span> -
-            <span th:text="${item.quantity}">Quantity</span> x
-            <span th:text="${item.unitPrice}">Price</span> <!-- Assuming you have unitPrice and quantity -->
-        </li>
-    </ul>
-    <p><strong>Total Amount:</strong> <span th:text="${order.totalAmount}">Total</span></p>
-    <p><strong>Reward Applied:</strong> <span th:text="${order.rewardUsed} ? 'Yes' : 'No'">Reward Status</span></p>
+        <ul>
+            <li th:each="item : ${order.orderItems}"> <!-- Adjusted to iterate over orderItems -->
+                <span th:text="${item.product.name}">Product Name</span> -
+                <span th:text="${item.quantity}">Quantity</span> x
+                <span th:text="${#numbers.formatDecimal(item.unitPrice, 0, 'COMMA', 2, 'POINT')}">Price</span> <!-- Assuming you have unitPrice and quantity -->
+            </li>
+        </ul>
+        <div>
+            <p><strong>Total Amount:</strong> <span th:text="${order.totalAmount}">Total</span></p>
+            <p><strong>Reward Applied:</strong> <span th:text="${order.rewardUsed} ? 'Yes' : 'No'">Reward Status</span></p>
 
-    <div th:if="${user.points >= 100 and not order.rewardUsed}">
-        <form th:action="@{/orders/{orderId}/useReward(orderId=${order.id})}" method="post">
-            <input type="submit" value="Use Reward for $10 Discount">
+        </div>
+
+        <div th:if="${user.points >= 100 and not order.rewardUsed}">
+            <form th:action="@{/orders/{orderId}/useReward(orderId=${order.id})}" method="post">
+                <input type="submit" value="Use Reward for $10 Discount">
+            </form>
+        </div>
+
+        <form th:action="@{/orders/{orderId}/checkout(orderId=${order.id})}" method="post">
+            <button type="submit">Complete Checkout</button>
         </form>
+
     </div>
 
-    <form th:action="@{/orders/{orderId}/checkout(orderId=${order.id})}" method="post">
-        <button type="submit">Complete Checkout</button>
-    </form>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
