@@ -48,6 +48,8 @@ public class SpringSecurity {
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll()
                                 .logoutSuccessUrl("/login?logout")
+                                .invalidateHttpSession(true) // This line explicitly shows session management
+                                .deleteCookies("JSESSIONID") // Cookie management related to the session
                 );
 
         return http.build();

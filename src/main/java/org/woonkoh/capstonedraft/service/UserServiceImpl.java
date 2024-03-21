@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDto.getEmail());
 
         //encrypt the password once we integrate spring security
-        //user.setPassword(userDto.getPassword());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         Role role = roleRepository.findByName("ROLE_ADMIN");
         if(role == null){
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService {
             user.getRoles().clear();
             user.getRewards().clear();
             user.getOrders().clear();
-            userRepository.saveAndFlush(user); // Sync changes
+            userRepository.saveAndFlush(user);
 
             // Delete the user
             userRepository.delete(user);
