@@ -2,7 +2,7 @@
 Capstone project for Per Scholas
 
 # Overview
-Restaurant rewards system application built with Java, Spring Boot, MySQL, Thymeleaf
+Restaurant rewards system application built with Java, Spring Boot, MySQL, Thymeleaf <br>
 App allows user to make purchases and get reward points for every dollar spent.
 
 ### Functions
