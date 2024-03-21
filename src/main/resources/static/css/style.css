@@ -509,16 +509,21 @@ button:hover {
 }
 
 .order-container div {
-  width: 30%;
+  width: 50%;
+}
+
+.reward-container {
+  width: 100%;
 }
 
 
 /* Reward status */
-.status-available{
-  color: #05c200;
+.table .status-available{
+  color: #00972d;
+  font-weight: bold;
 }
 
-.status-not-available {
+.table .status-not-available {
   color: #ae1c00;
 }
 

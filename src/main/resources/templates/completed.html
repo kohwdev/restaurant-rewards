@@ -56,6 +56,11 @@
                     Price: <span th:text="${#numbers.formatDecimal(item.unitPrice, 0, 'COMMA', 2, 'POINT')}"></span>
                 </li>
             </ul>
+
+            <p th:if="${order.rewardUsed}">
+                Discount Applied: <span>- $10.00</span>
+            </p>
+
             <p>Total Amount: <span th:text="${order.totalAmount}"></span></p>
             <!-- Display other order details as needed -->
         </div>

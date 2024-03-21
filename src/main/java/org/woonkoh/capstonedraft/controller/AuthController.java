@@ -10,8 +10,6 @@ import org.woonkoh.capstonedraft.model.User;
 import org.woonkoh.capstonedraft.model.UserDto;
 import org.woonkoh.capstonedraft.repository.UserRepository;
 import org.woonkoh.capstonedraft.service.UserService;
-
-import java.security.Principal;
 import java.util.List;
 
 @Controller

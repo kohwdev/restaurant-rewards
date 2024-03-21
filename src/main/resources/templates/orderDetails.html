@@ -59,9 +59,9 @@
 
         </div>
 
-        <div th:if="${user.points >= 100 and not order.rewardUsed}">
+        <div class="reward-container" th:if="${user.points >= 100 and not order.rewardUsed}">
             <form th:action="@{/orders/{orderId}/useReward(orderId=${order.id})}" method="post">
-                <input type="submit" value="Use Reward for $10 Discount">
+                <input type="submit" value="Use Reward $10 OFF">
             </form>
         </div>
 

@@ -54,14 +54,28 @@
             <th>Points earned</th>
             <th>Reward status</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each = "user : ${users}">
             <td th:text = "${user.firstName + ' ' + user.lastName}"></td>
             <td th:text = "${user.email}"></td>
-            <td th:text = "${user.points}"></td>
-            <td th:text = "${user.rewardStatus}"></td>
+            <td th:text = "${user.points}">
+            </td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar"
+                         th:style="'width:' + ${user.points / 100.0 * 100} + '%'"
+                         th:aria-valuenow="${user.points}" aria-valuemin="0" aria-valuemax="100"
+                         th:text="${user.points > 100 ? '100' : user.points} + '%'">
+                    </div>
+                </div>
+            </td>
+
+            <td th:text="${user.rewardStatus}"
+                th:classappend="${user.rewardStatus == 'Available' ? 'status-available' : 'status-not-available'}">
+            </td>
 
 <!--            <td th:text = "${user.id}"></td>-->
             <td>
