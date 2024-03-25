@@ -6,21 +6,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.woonkoh.capstonedraft.model.Order;
 import org.woonkoh.capstonedraft.model.User;
 import org.woonkoh.capstonedraft.model.UserDto;
 import org.woonkoh.capstonedraft.repository.UserRepository;
+import org.woonkoh.capstonedraft.service.OrderService;
 import org.woonkoh.capstonedraft.service.UserService;
+import org.woonkoh.capstonedraft.service.UserServiceImpl;
+
+import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AuthController {
 
+    private final OrderService orderService;
+    private final UserServiceImpl userServiceImpl;
     private UserRepository userRepository;
     private UserService userService;
 
-    public AuthController(UserService userService, UserRepository userRepository) {
+    public AuthController(UserService userService, UserRepository userRepository, OrderService orderService, UserServiceImpl userServiceImpl) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.orderService = orderService;
+        this.userServiceImpl = userServiceImpl;
     }
 
     @GetMapping("index")
@@ -65,11 +76,62 @@ public class AuthController {
 
 
     //Get all registered users from database
-    @GetMapping("/users")
-    public String listRegisteredUsers(Model model){
-        List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "users";
+//    @GetMapping("/users")
+//    public String listRegisteredUsers(Model model){
+//        List<UserDto> users = userService.findAllUsers();
+//        model.addAttribute("users", users);
+//        return "users";
+//    }
+//
+//    @GetMapping("/profile")
+//    public String showUserProfile(Model model, Principal principal) {
+//        if (principal == null) {
+//            return "redirect:/login";
+//        }
+//
+//        String userEmail = principal.getName();
+//        User user = userService.findByEmail(userEmail);
+//        List<Order> orders = orderService.findOrdersByUserEmail(userEmail);
+//
+//        List<Order> filteredOrders = orders.stream()
+//                .filter(order -> order.getOrderDate() != null && order.getTotalAmount().compareTo(BigDecimal.ZERO) != 0)
+//                .toList();
+//
+//        model.addAttribute("user", user);
+//        model.addAttribute("orders", filteredOrders);
+//
+//        return "userProfile"; // userProfile.html
+//    }
+
+    @GetMapping("/account")
+    public String handleUserAccount(Model model, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        String userEmail = principal.getName();
+        User user = userService.findByEmail(userEmail);
+
+        // Check if the user has the ADMIN role
+        boolean isAdmin = user.getRoles().stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"));
+
+        if (isAdmin) {
+            // If user is ADMIN, list all registered users
+            List<UserDto> users = userService.findAllUsers();
+            model.addAttribute("users", users);
+            return "users"; // path to the Thymeleaf template listing all users
+        } else {
+            // If user is not ADMIN, show the user profile
+            List<Order> orders = orderService.findOrdersByUserEmail(userEmail);
+            List<Order> filteredOrders = orders.stream()
+                    .filter(order -> order.getOrderDate() != null && order.getTotalAmount().compareTo(BigDecimal.ZERO) > 0)
+                    .collect(Collectors.toList());
+
+
+            model.addAttribute("user", user);
+            model.addAttribute("orders", filteredOrders);
+            return "userProfile"; // path to the Thymeleaf template for user profile
+        }
     }
 
 

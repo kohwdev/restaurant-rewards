@@ -9,40 +9,17 @@
             rel="stylesheet"
     />
 
+    <script src="https://kit.fontawesome.com/e908656932.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
-<header class="primary-header container group">
-    <h1 class="logo">
-        <a href="index"
-        >Amazing <br />
-            Restaurant</a
-        >
-    </h1>
-    <nav class="nav primary-nav">
-        <ul>
-            <li><a href="/">Home</a></li>
-
-            <li><a href="/products">Menu</a></li>
-
-            <li><a href="/users">Account</a></li>
-
-            <!--if user is not logged in, display log in/ sign up -->
-            <li sec:authorize="!isAuthenticated()"><a href="/register">Log in / Sign up</a></li>
-            <!--if user IS logged in, display logout -->
-            <li sec:authorize="isAuthenticated()">
-                <form action="/logout" method="post">
-                    <input class="logout-btn" type="submit" value="Logout" />
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                </form>
-            </li>
-        </ul>
-    </nav>
+<header th:insert="~{fragments/header}" class="primary-header container group">
 </header>
 
 <section class="hero container">
-    <h2>Get rewards from every dollar spent</h2>
+    <h2>Get rewards from every dollar spent.</h2>
 
     <a class="btn btn-alt" href="/register">Create your account</a>
 </section>
@@ -88,7 +65,9 @@
     <small>&copy; Amazing Restaurant</small>
     <nav class="nav">
         <ul>
-            <li><a href="">Social media app</a></li>
+            <li><a href="https://github.com/kohwdev"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="https://github.com/kohwdev"><i class="fa-brands fa-square-instagram"></i></a></li>
+            <li><a href="https://github.com/kohwdev"><i class="fa-brands fa-square-x-twitter"></i></i></a></li>
         </ul>
     </nav>
 </footer>

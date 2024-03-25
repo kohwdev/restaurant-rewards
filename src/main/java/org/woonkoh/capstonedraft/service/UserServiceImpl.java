@@ -36,10 +36,21 @@ public class UserServiceImpl implements UserService {
 
         //encrypt the password once we integrate spring security
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        Role role = roleRepository.findByName("ROLE_ADMIN");
-        if(role == null){
-            role = checkRoleExist();
+       Role role = roleRepository.findByName("ROLE_USER");
+//       Role role = roleRepository.findByName("ROLE_ADMIN");
+//        if(role == null){
+//            role = checkRoleExist();
+//        }
+
+        if (role == null) {
+            role = new Role();
+            role.setName("ROLE_USER");
+//            role.setName("ROLE_ADMIN");
+
+            // Save the new role to the database
+            roleRepository.save(role);
         }
+
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
     }
@@ -70,7 +81,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> findAllUsers() {
         List<User> users = userRepository.findAll();
-        return users.stream().map((user) -> convertEntityToDto(user))
+//        return users.stream().map((user) -> convertEntityToDto(user))
+//                .collect(Collectors.toList());
+        //filter out admin
+        return users.stream()
+                .filter(user -> user.getRoles().stream()
+                        .noneMatch(role -> role.getName().equals("ROLE_ADMIN")))
+                .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
@@ -96,9 +113,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private Role checkRoleExist() {
-        Role role = new Role();
-        role.setName("ROLE_ADMIN");
-        return roleRepository.save(role);
-    }
+//    private Role checkRoleExist() {
+//        Role role = new Role();
+//        role.setName("ROLE_ADMIN");
+//        return roleRepository.save(role);
+//    }
 }

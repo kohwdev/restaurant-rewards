@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,6 +98,16 @@ public class OrderService {
         return activeOrder;
     }
 
+    public List<Order> findOrdersByUserEmail(String email) {
+        // Assuming you have a UserRepository to fetch the user by email
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            return orderRepository.findOrderByUserId(user.getId());
+        }
+        return new ArrayList<>();
+    }
+
+
 
 
 
@@ -127,7 +138,7 @@ public class OrderService {
         return order;
     }
 
-    private void checkAndUpdateUserRewards(User user) {
+    public void checkAndUpdateUserRewards(User user) {
         // 100 points are required for a reward to become available
         if (user.getPoints() >= 100) {
             updateRewardStatusToAvailable(user);
