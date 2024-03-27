@@ -1,6 +1,9 @@
 package org.woonkoh.capstonedraft.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -141,12 +144,23 @@ public class AuthController {
         try {
             userService.deleteUser(id);
 
-            redirectAttributes.addFlashAttribute("message", "User with id=" + id + " has been deleted successfully!");
+            // Check if the user has ROLE_USER
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            boolean isUserRole = authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"));
+
+            if (isUserRole) {
+                // For ROLE_USER, redirect to logout
+                redirectAttributes.addFlashAttribute("message", "User with id=" + id + " has been deleted successfully! Please log in again.");
+                return "redirect:/logout";
+            } else {
+                // For other roles, redirect to account overview
+                redirectAttributes.addFlashAttribute("message", "User with id=" + id + " has been deleted successfully!");
+                return "redirect:/account";
+            }
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", e.getMessage());
+            return "redirect:/account";
         }
-
-        return "redirect:/users";
     }
 
 
@@ -185,7 +199,7 @@ public class AuthController {
         User user = convertToEntity(userDto);
         userRepository.save(user);
         redirectAttributes.addFlashAttribute("successMessage", "User updated successfully!");
-        return "redirect:/users"; // Or wherever you'd like to redirect after updating
+        return "redirect:/account";
     }
     //after the update is made, convert dto back to entity
     private User convertToEntity(UserDto userDto) {

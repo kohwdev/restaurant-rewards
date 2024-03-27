@@ -20,6 +20,7 @@
         <th class="th-sm">Email</th>
         <th class="th-sm">Points</th>
         <th class="th-sm">Reward status</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +36,15 @@
                      th:text="${user.points >= 100 ? 'Available' : user.points + '%'} ">
                 </div>
             </div>
+        </td>
+        <td>
+            <a class="btn"
+               th:href="@{/editUser/{id}(id=${user.id})}"
+            ><i class="fa-regular fa-pen-to-square fa-lg"></i></a>
+            <a class="btn"
+               th:href="@{/delete/{id}(id=${user.id})}"
+               onclick="return confirm('Are you sure?')"
+            ><i class="fa-solid fa-trash fa-lg"></i></a>
         </td>
     </tr>
     </tbody>
