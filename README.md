@@ -23,3 +23,10 @@ This was what I envisioned at first and how the application is going to flow fro
 ## ER Diagram
 ![Alt text](<ERDiagram.png>)
 Relationship between all the entities.
+
+## Screenshots
+[![Screenshot-2024-03-29-at-4-30-51-PM.png](https://i.postimg.cc/RCf0XjLS/Screenshot-2024-03-29-at-4-30-51-PM.png)](https://postimg.cc/w3qHB4rZ)
+[![Screenshot-2024-03-29-at-4-32-03-PM.png](https://i.postimg.cc/YSG7jWXr/Screenshot-2024-03-29-at-4-32-03-PM.png)](https://postimg.cc/SXh3vJF3)
+[![Screenshot-2024-03-29-at-4-33-16-PM.png](https://i.postimg.cc/nzSq2N4Y/Screenshot-2024-03-29-at-4-33-16-PM.png)](https://postimg.cc/8JWFPKnj)
+[![Screenshot-2024-03-29-at-4-32-51-PM.png](https://i.postimg.cc/QNq28mXg/Screenshot-2024-03-29-at-4-32-51-PM.png)](https://postimg.cc/8sjKwhfs)
+
